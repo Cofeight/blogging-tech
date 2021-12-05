@@ -28,8 +28,8 @@ const {User,Post,Opinion} = require('./models');
 
 //app.use(session(sess));
 // Sets up the Express app to handle data parsing
-//app.use(express.urlencoded({ extended: true }));
-//app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Static directory
 //app.use(express.static('public'));
@@ -39,10 +39,6 @@ const {User,Post,Opinion} = require('./models');
 //app.set('view engine', 'handlebars');
  
 app.use('/',allRoutes);
-
-app.get("/", (req,res)=>{
-    res.send("HELLO!")
-})
 
 sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {

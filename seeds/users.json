@@ -1,0 +1,22 @@
+[
+    {
+        "email": "blogtest@blog.com",
+        "username": "blogtest",
+        "password": "password"
+    },
+    {
+        "email": "bezos@blog.com",
+        "username": "bezosblog",
+        "password": "password"
+    },
+    {
+        "email": "boboblaw@blog.com",
+        "username": "boboblaw",
+        "password": "password"
+    },
+    {
+        "email": "manatee@blog.com",
+        "username": "manatee",
+        "password": "password"
+    }
+]
