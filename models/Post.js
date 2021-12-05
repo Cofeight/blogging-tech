@@ -28,4 +28,4 @@ Post.init({
     sequelize
 });
 
-module.exports = Post
+module.exports = Post;
