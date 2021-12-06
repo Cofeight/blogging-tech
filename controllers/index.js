@@ -4,7 +4,7 @@ const apiRoutes = require('./apiRoutes');
 
 router.use('/api', apiRoutes)
 router.get('/',(req, res) => {
-    res.send("HI FROM CONTROLLER INDEX! LOCAL HOST 5000")
+    res.send("HELLO FROM CONTROLLERS/INDEX.JS! 5000....RE-PORT-ING FOR DUTY!")
 })
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {User} = require('../../models/');
+const bcrypt = require('bcrypt');
 
 router.get("/", (req, res) => {
     User.findAll().then(UserData => {
@@ -31,6 +32,29 @@ router.post("/", (req, res)=> {
         password: req.body.password
     }).then(newUser=> {
         res.json(newUser)
+    }).catch(err => {
+        console.error(err);
+        res.status(500).json({ err });
+    })
+})
+
+router.post("/login", (req, res)=> {
+    User.findOne({
+        where:{
+            email: req.body.email,
+        }
+    }).then(foundUser=> {
+        if(!foundUser){
+           return res.status(401).json({err:"invalid username or password."});
+        }
+        if(!req.body.password){
+            return res.status(401).json({err:"invalid username or password."});
+        }
+        if(bcrypt.compareSync(req.body.password, foundUser.password)){
+            return res.json(foundUser)
+        } else {
+            return res.status(401).json({err:"invalid username or password."});
+        }
     }).catch(err => {
         console.error(err);
         res.status(500).json({ err });

@@ -1,10 +1,10 @@
 const express = require('express');
-//const session = require('express-session');
+const session = require('express-session');
 //const exphbs = require('express-handlebars');
 const allRoutes = require('./controllers');
 
 const sequelize = require('./config/connection');
-//const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Sets up the Express App
 // =============================================================
@@ -14,17 +14,17 @@ const PORT = process.env.PORT || 5000;
 const {User,Post,Opinion} = require('./models');
 
 
-//const sess = {
-//    secret: process.env.SESSION_SECRET,
-//    cookie: {
-//        maxAge:1000*60*60*1
-//    },
-//    resave: false,
-//    saveUninitialized: true,
-//    store: new SequelizeStore({
-//        db: sequelize
-//    })
-//};
+const sess = {
+    secret: process.env.SESSION_SECRET,
+    cookie: {
+        maxAge:1000*60*60*3
+    },
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize
+    })
+};
 
 //app.use(session(sess));
 // Sets up the Express app to handle data parsing
@@ -40,7 +40,7 @@ app.use(express.json());
  
 app.use('/',allRoutes);
 
-sequelize.sync({ force: false }).then(function() {
+sequelize.sync({ force: true }).then(function() {
     app.listen(PORT, function() {
     console.log('You have tuned in to the sweet sounds of PORT ' + PORT);
     });
