@@ -16,4 +16,4 @@ Opinion.init({
     sequelize
 });
 
-module.exports = Opinion
+module.exports = Opinion;

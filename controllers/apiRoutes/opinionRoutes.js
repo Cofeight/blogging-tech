@@ -3,8 +3,8 @@ const router = express.Router();
 const { Opinion } = require('../../models/');
 
 router.get("/", (req, res) => {
-    Post.findAll().then(PostData => {
-        res.json(PostData);
+    Opinion.findAll().then(opinionData => {
+        res.json(opinionData);
     }).catch(err => {
         console.error(err);
         res.status(500).json({ err });
@@ -12,11 +12,11 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-    Post.findByPk(req.params.id).then(singlePost => {
-        if (singlePost) {
-            res.json(singlePost);
+    Opinion.findByPk(req.params.id).then(singleOpinion => {
+        if (singleOpinion) {
+            res.json(singleOpinion);
         } else {
-            res.status(404).json({ err: "No post was found." })
+            res.status(404).json({ err: "Sorry, nothing was found." })
         }
     }).catch(err => {
         console.log(err);
@@ -25,15 +25,15 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-    Post.create({
+    Opinion.create({
         like: req.body.like,
         review: req.body.review,
-        user_id: req.body.user_id,
+        //user_id: req.body.user_id,
         //maybe user.id?????
-        PostId: req.body.post_id
+        //opinion_id: req.body.opinion_id,
         //maybe post.id?????
-    }).then(newPost => {
-        res.json(newPost)
+    }).then(newOpinion => {
+        res.json(newOpinion)
     }).catch(err => {
         console.error(err);
         res.status(500).json({ err });
@@ -41,41 +41,40 @@ router.post("/", (req, res) => {
 })
 
 router.put("/:id", (req, res) => {
-    Post.update({
+    Opinion.update({
         like: req.body.like,
         review: req.body.review,
-        user_id: req.body.user_id,
+        //user_id: req.body.user_id,
         //maybe user.id?????
-        PostId: req.body.post_id
+        //opinion_id: req.body.opinion_id
         //maybe post.id?????
     }, {
         where: {
             id: req.params.id
         }
-    }).then(updatedPost => {
-        if (updatedPost[0]) {
-            res.json(updatedPost)
+    }).then(updatedOpinion => {
+        if (updatedOpinion[0]) {
+            res.json(updatedOpinion)
         } else {
-            res.status(404) / json({ err: "There were no posts found!" })
+            res.status(404).json({ err: "There were no posts found!" })
         }
-        res.json(updatedPost)
+        res.json(updatedOpinion)
     }).catch(err => {
         console.error(err);
         res.status(500).json({ err });
     })
 })
 
-
 router.delete("/:id", (req, res) => {
-    Post.destroy({
+    Opinion.destroy({
         where: {
             id: req.params.id
         }
-    }).then(deletedPost => {
-        if (deletedPost) {
-            res.json(deletedPost)
+    }).then(deletedOpinion => {
+        if (deletedOpinion) {
+            res.json(deletedOpinion)
         } else {
-            res.status(404).json({ err: "Post could not be found." })
+            res.status(404).json({ err: "Opinion could not be found." })
         }
     }).catch(err => {
         console.log(err);
