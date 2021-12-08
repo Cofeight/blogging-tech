@@ -25,12 +25,15 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
+    if(!req.session.user){
+        return res.status(403).json({err:"Login is required."})
+    }
     Opinion.create({
         like: req.body.like,
         review: req.body.review,
-        //user_id: req.body.user_id,
+        user_id: req.body.user_id,
         //maybe user.id?????
-        //opinion_id: req.body.opinion_id,
+        opinion_id: req.body.opinion_id,
         //maybe post.id?????
     }).then(newOpinion => {
         res.json(newOpinion)

@@ -2,25 +2,25 @@
     {
         "like": 2,
         "review": "I did not like that at all...",
-        "userId": 1,
+        "user_id": 1,
         "postId": 4
     },
     {
         "like": 5,
         "review": "Meh, it was okay I guess.",
-        "userId": 6,
+        "user_id": 6,
         "postId": 4
     },
     {
         "like": 10,
         "review": "BEST SONG EVER!!!!!",
-        "userId": 5,
+        "user_id": 5,
         "postId": 8
     },
     {
         "like": 7,
         "review": "I really like the rhythm!",
-        "userId": 6,
+        "user_id": 6,
         "postId": 8
     }
 ]
