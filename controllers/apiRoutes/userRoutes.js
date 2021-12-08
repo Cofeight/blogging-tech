@@ -4,62 +4,70 @@ const { User } = require('../../models/');
 const bcrypt = require('bcrypt');
 
 router.get("/", (req, res) => {
-    User.findAll().then(UserData => {
-        res.json(UserData);
-    }).catch(err => {
-        console.error(err);
-        res.status(500).json({ err });
-    })
-})
+    User.findAll()
+        .then(UserData => {
+            res.json(UserData);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ err });
+        });
+});
 
 router.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.json({ msg: "Session has been deleted." })
     });
-})
+});
 
 router.get("/:id", (req, res) => {
-    User.findByPk(req.params.id).then(singleUser => {
-        if (singleUser) {
-            res.json(singleUser);
-        } else {
-            res.status(404).json({ err: "No user was found." })
-        }
-    }).catch(err => {
-        console.error(err);
-        res.status(500).json({ err });
-    })
-})
+    User.findByPk(req.params.id)
+        .then(singleUser => {
+            if (singleUser) {
+                res.json(singleUser);
+            } else {
+                res.status(404).json({ err: "No user was found." })
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ err });
+        });
+});
 
 router.post("/", (req, res) => {
     User.create({
         email: req.body.email,
         username: req.body.username,
         password: req.body.password
-    }).then(newUser => {
-        res.json(newUser);
-        req.session.user = {
-            id: foundUser.id,
-            email: foundUser.email,
-            username: foundUser.username
-        }
-    }).catch(err => {
-        console.error(err);
-        res.status(500).json({ err });
     })
-})
+        .then(newUser => {
+            req.session.user = {
+                id: newUser.id,
+                email: newUser.email,
+                username: newUser.username
+            };
+            res.json(newUser);
+        })
+        .catch(err => {
+            console.error(err);
+            req.session.destroy(() => {
+                res.status(500).json({ err });
+            });
+        });
+});
 
 router.post("/login", (req, res) => {
     User.findOne({
         where: {
             email: req.body.email,
         }
-    }).then(foundUser => {
+    })
+    .then(foundUser => {
         if (!foundUser) {
-            req.session.destroy(() => {
+            return req.session.destroy(() => {
                 return res.status(401).json({ err: "invalid username or password." });
-            })
-            return res.status(401).json({ err: "invalid username or password." });
+            });
         }
         if (!req.body.password) {
             return res.status(401).json({ err: "invalid username or password." });
