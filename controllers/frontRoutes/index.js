@@ -41,8 +41,10 @@ router.get("/login",(req,res)=>{
   return  res.render("login")
 })
 
+module.exports = router;
 
-////////////////////////////////SAVE ME PLEASE
+
+////////////////////////////////SAVE
 
 //router.get('/login', (req, res) => {
 //    console.log("login route")
@@ -54,6 +56,3 @@ router.get("/login",(req,res)=>{
 
 //   return res.render("login");
 //});
-
-
-module.exports = router;

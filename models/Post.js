@@ -4,16 +4,7 @@ const sequelize = require('../config/connection');
 class Post extends Model {}
 
 Post.init({
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false,
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
+
     content: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -27,3 +18,15 @@ Post.init({
 });
 
 module.exports = Post;
+
+
+//id: {
+//    type: DataTypes.INTEGER,
+//    autoIncrement: true,
+//    primaryKey: true,
+//    allowNull: false,
+//},
+//user_id: {
+//    type: DataTypes.INTEGER,
+//    allowNull: false,
+//},
