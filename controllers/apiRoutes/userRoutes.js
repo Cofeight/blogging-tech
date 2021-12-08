@@ -37,7 +37,6 @@ router.post("/", (req, res)=> {
         res.status(500).json({ err });
     })
 })
-
 router.post("/login", (req, res)=> {
     User.findOne({
         where:{
@@ -51,6 +50,11 @@ router.post("/login", (req, res)=> {
             return res.status(401).json({err:"invalid username or password."});
         }
         if(bcrypt.compareSync(req.body.password, foundUser.password)){
+            req.session.user = {
+                id:foundUser.id,
+                email:foundUser.email,
+                username:foundUser.username
+            }
             return res.json(foundUser)
         } else {
             return res.status(401).json({err:"invalid username or password."});
@@ -81,7 +85,6 @@ router.put("/:id", (req, res)=>{
         res.status(500).json({ err });
     })
 })
-
 
 router.delete("/:id", (req, res)=>{
     User.destroy({

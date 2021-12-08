@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
         res.status(500).json({ err });
     })
 })
-
+ 
 router.get("/:id", (req, res) => {
     Post.findByPk(req.params.id).then(singlePost => {
         if(singlePost){
