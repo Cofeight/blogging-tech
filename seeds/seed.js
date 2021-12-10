@@ -10,7 +10,7 @@ const seedDatabase = async () => {
     await Gopro.bulkCreate(goproData);
     console.log("Your gopro data has been seeded.");
 
-    await User.bulkCreate(userData);
+    await User.bulkCreate(userData, {individualHooks: true});
     console.log("Your user data has been seeded.");
 
     await Review.bulkCreate(reviewData);

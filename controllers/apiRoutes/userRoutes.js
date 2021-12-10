@@ -3,9 +3,6 @@ const router = express.Router();
 const { User } = require('../../models/');
 const bcrypt = require('bcrypt');
 
-
-//COMPLETED @1:13:00
-
 // CREATE - .post("/(tablename)")
 
 // READ ALL - .get("/(tablename)")
@@ -15,7 +12,6 @@ const bcrypt = require('bcrypt');
 // DESTROY - .delete("/(tablename)/(:id)")
 
 // READ ONE - .get("/(tablename)(:id)")
-
 
 
 //READ ALL
@@ -68,6 +64,46 @@ router.post("/", (req, res) => {
             });
         });
 });
+
+
+//LOGIN ROUTE
+router.post("/login", (req, res) => {
+    User.findOne({
+        where: {
+            email: req.body.email,
+        }
+    })
+        .then(foundUser => {
+            if (!foundUser) {
+                return res.status(401).json({ err: "invalid username or password." })
+                }
+            if(!req.body.password) {
+                return res.status(401).json({ err: "invalid username or password." })
+                }
+            if(bcrypt.compareSync(req.body.password, foundUser.password)){
+                req.session.user = {
+                    id: foundUser.id,
+                    email: foundUser.email,
+                    username: foundUser.username
+                }
+                return res.json(foundUser)
+            } else {
+                return res.status(401).json({ err: "invalid username or password." })
+            }
+            }).catch(err => {
+                console.log(err);
+                res.status(500).json({ err })
+            })
+        })
+
+
+//            req.session.user = {
+//                id: newUser.id,
+//                email: newUser.email,
+//                username: newUser.username
+//            };
+
+
 
 //UPDATE
 router.put("/:id", (req, res) => {
