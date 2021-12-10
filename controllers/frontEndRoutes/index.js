@@ -1,23 +1,42 @@
-//const express = require('express');
-//const router = express.Router();
-//const {User, Gopro, Review} = require("../../models");
+const express = require('express');
+const router = express.Router();
+const {User, Gopro, Review} = require("../../models");
 //
-//router.get("/", (req, res)=> {
-//   return res.render("home")
-//})
+router.get("/", (req, res)=> {
+   return res.render("home")
+})
+
+
+router.get("/models", (req, res)=> {
+     Gopro.findAll()
+   .then(goproData=> {
+      console.log(goproData)
+      console.log("+++++++++++++++++++++++++++++++++++++")
+      const goproHandlebarsData = goproData.map(item => item.get({plain: true}))
+      console.log(goproHandlebarsData)
+    return res.render("models/index", {
+        models: goproHandlebarsData
+    })
+})
+})
+
 //
-//router.get("/userposts", (req, res) => {
-//   Post.findAll()
-//   .then(postsData=> {
-//      console.log(postsData)
+//router.get("/models", (req, res) => {
+//   Gopro.findAll()
+//   .then(goproData=> {
+//      console.log(goproData)
 //      console.log("+++++++++++++++++++++++++++++++++++++")
-//      const postHandlebarsData = postsData.map(item => item.get({plain: true}))
-//      console.log(postHandlebarsData)
+//      const goproHandlebarsData = goproData.map(item => item.get({plain: true}))
+//      console.log(goproHandlebarsData)
 //      res.render("userposts/index", {
-//         posts: postHandlebarsData
+//         posts: goproHandlebarsData
 //      })
 //   })
 //})
+//
+
+
+
 
 //router.get("/userposts/:id",(req,res)=>{
 //   Post.findByPk(req.params.id,{
@@ -40,7 +59,7 @@
 //  return  res.render("profile")
 //})
 //
-//module.exports = router;
+module.exports = router;
 
 
 ////////////////////////////////SAVE
@@ -96,4 +115,4 @@
 //       console.log(handlebarsData);
 //       res.render("post/add",handlebarsData)
 //   })
-//})
+//}

@@ -2,13 +2,44 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
-nav{
-  display:flex;
-  justify-content: space-around;
-  background: green;
-  border: 10px solid
+.navbar-links {
+transition: 0.7s;
+background-color: red;
+border: 10px solid rgb(39, 236, 13);
+display: flex;
+padding: 20px;
+padding-left: 30px;
+padding-right: 30px;
+text-decoration: none;
+justify-content: space-between;
 }
 
+.pageHeader {
+    text-align: center;
+    font-size: 100px;
+}
+
+.card {
+    width: 50%;
+    border: 1px solid black;
+    text-align: center;
+
+}
+
+.card > img {
+    display:block;
+    margin: 0 auto;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-model {
+    font-size: 50px;
+}
