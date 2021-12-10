@@ -27,7 +27,7 @@ justify-content: space-between;
 
 .navbar-links a:hover {
     color: white;
-    transition: 0.9s;
+    transition: 0.5s;
   }
   
 
@@ -40,6 +40,20 @@ justify-content: space-between;
     text-align: center;
     font-size: 40px;
 }
+
+a.reviewCard {
+    text-decoration: none;
+    font-size: 30px;
+    color:black;
+}
+
+
+a.reviewCard:hover {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
 
 .profileCardReviewContainer {
     display: flex;
@@ -97,4 +111,9 @@ a.card:hover {
 
 .card-model {
     font-size: 50px;
+}
+
+
+.cardReviewContainer a {
+text-decoration: none;
 }
