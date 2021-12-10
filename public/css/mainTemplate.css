@@ -10,7 +10,7 @@ transition: 0.7s;
 background-color: red;
 border: 10px solid rgb(39, 236, 13);
 display: flex;
-padding: 20px;
+padding: 10px;
 padding-left: 30px;
 padding-right: 30px;
 text-decoration: none;
@@ -19,14 +19,43 @@ justify-content: space-between;
 
 .pageHeader {
     text-align: center;
-    font-size: 100px;
+    font-size: 80px;
 }
+
+.reviewHeader {
+    text-align: center;
+    font-size: 40px;
+}
+
+.profileCardReviewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40vh;
+    margin: 0 auto;
+    align-items: center;
+}
+
+
+
 
 .card {
     width: 50%;
     border: 1px solid black;
     text-align: center;
 
+}
+
+.big-image {
+    align-items: center;
+    margin: 0 auto;
+    width: 40vw;
+}
+
+.cardReviewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vh;
+    margin: 0 auto;
 }
 
 .card > img {
@@ -37,7 +66,7 @@ justify-content: space-between;
 .cardContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .card-model {

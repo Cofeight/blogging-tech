@@ -6,7 +6,9 @@ router.get("/", (req, res)=> {
    return res.render("home")
 })
 
-
+//ROUTES TO ALL MODELS PAGE
+//EXTRACTS MODEL DATA INTO RAW JSON FORMAT FOR HANDLEBARS_DATA
+//FOLDER ACCESS CAN BE CONFIGURED SUCH AS ("folder/subfolder")
 router.get("/models", (req, res)=> {
      Gopro.findAll()
    .then(goproData=> {
@@ -20,37 +22,43 @@ router.get("/models", (req, res)=> {
 })
 })
 
-//
-//router.get("/models", (req, res) => {
-//   Gopro.findAll()
-//   .then(goproData=> {
-//      console.log(goproData)
-//      console.log("+++++++++++++++++++++++++++++++++++++")
-//      const goproHandlebarsData = goproData.map(item => item.get({plain: true}))
-//      console.log(goproHandlebarsData)
-//      res.render("userposts/index", {
-//         posts: goproHandlebarsData
-//      })
-//   })
-//})
-//
+
+//ROUTES TO ONE MODEL PAGE
+
+router.get("/models/:id",(req,res)=>{
+   Gopro.findByPk(req.params.id, {
+       include: [{
+           model: Review,
+           include: [User]
+       }]
+   })
+   .then(goproData=>{
+       const handlebarsData = goproData.get({plain:true})
+       console.log(handlebarsData);
+       res.render("models/single",handlebarsData);
+   })
+})
+
+
+router.get("/profile/:id",(req,res)=>{
+    User.findByPk(req.params.id, {
+        include: [{
+            model: Review,
+            include: [Gopro]
+        }]
+    })
+    .then(userData=>{
+        const handlebarsData = userData.get({plain:true})
+        console.log(handlebarsData);
+        res.render("profile",handlebarsData);
+    })
+ })
+ 
+ 
 
 
 
 
-//router.get("/userposts/:id",(req,res)=>{
-//   Post.findByPk(req.params.id,{
-//       include:[{
-//           model:Post,
-//           include:[User]
-//       }]
-//   })
-//   .then(postsData=>{
-//       const handlebarsData = postsData.get({plain:true})
-//       console.log(handlebarsData);
-//       res.render("userposts/single",handlebarsData);
-//   })
-//})
 
 //router.get("/login",(req,res)=>{
 //   if(req.session.user){

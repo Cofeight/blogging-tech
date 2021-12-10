@@ -1,11 +1,11 @@
-<h1 class="pageHeader">{{username}}</h1>
+<h1 class="pageHeader">{{model}}</h1>
+<img class="big-image" src="{{image}}" alt="{{model}}" >
 
 <h2 class="reviewHeader">Model Reviews</h2>
-<div class="profileCardReviewContainer">
+<div class="cardReviewContainer">
 {{#each Reviews}}
-                <img class="big-image" src="{{Gopro.image}}" alt="{{Gopro.model}}">
     <div class="card">
-        <h3>{{Gopro.model}}</h3>
+        <h3>{{User.username}}</h3>
         <h4>Rating: {{rating}}</h4>
         <p>{{review}}</p>
         <p>{{userId}}</p>
