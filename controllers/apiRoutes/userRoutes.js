@@ -26,6 +26,53 @@ router.get("/", (req, res) => {
         });
 });
 
+//LOGIN ROUTE
+router.post("/login", (req, res) => {
+    User.findOne({
+        where: {
+            email: req.body.email,
+        }
+    })
+        .then(foundUser => {
+            if (!foundUser) {
+                return req.session.destroy(() => {
+                    return res.status(401).json({ err: "invalid username or password." })
+                })
+            }
+            if (!req.body.password) {
+                return req.session.destroy(() => {
+                    return res.status(401).json({ err: "invalid username or password." })
+                })
+            }
+            if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+                req.session.user = {
+                    id: foundUser.id,
+                    email: foundUser.email,
+                    username: foundUser.username
+                };
+                return res.json({
+                    id: foundUser.id,
+                    email: foundUser.email,
+                    username: foundUser.username
+                })
+            } else {
+                req.session.destroy(() => {
+                    return res.status(401).json({ err: "invalid username or password." });
+                });
+            }
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json({ err })
+        })
+});
+
+//DESTROY SESSION / LOGOUT
+router.get("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.json({ msg: "Session has been destroyed." })
+    });
+});
+
 //READ ONE
 router.get("/:id", (req, res) => {
     User.findByPk(req.params.id)
@@ -50,11 +97,11 @@ router.post("/", (req, res) => {
         password: req.body.password
     })
         .then(newUser => {
-//            req.session.user = {
-//                id: newUser.id,
-//                email: newUser.email,
-//                username: newUser.username
-//            };
+            req.session.user = {
+                id: foundUser.id,
+                email: foundUser.email,
+                username: foundUser.username
+            };
             res.json(newUser);
         })
         .catch(err => {
@@ -64,46 +111,6 @@ router.post("/", (req, res) => {
             });
         });
 });
-
-
-//LOGIN ROUTE
-router.post("/login", (req, res) => {
-    User.findOne({
-        where: {
-            email: req.body.email,
-        }
-    })
-        .then(foundUser => {
-            if (!foundUser) {
-                return res.status(401).json({ err: "invalid username or password." })
-                }
-            if(!req.body.password) {
-                return res.status(401).json({ err: "invalid username or password." })
-                }
-            if(bcrypt.compareSync(req.body.password, foundUser.password)){
-                req.session.user = {
-                    id: foundUser.id,
-                    email: foundUser.email,
-                    username: foundUser.username
-                }
-                return res.json(foundUser)
-            } else {
-                return res.status(401).json({ err: "invalid username or password." })
-            }
-            }).catch(err => {
-                console.log(err);
-                res.status(500).json({ err })
-            })
-        })
-
-
-//            req.session.user = {
-//                id: newUser.id,
-//                email: newUser.email,
-//                username: newUser.username
-//            };
-
-
 
 //UPDATE
 router.put("/:id", (req, res) => {
@@ -138,66 +145,18 @@ router.delete("/:id", (req, res) => {
             id: req.params.id
         }
     })
-    .then(deletedUser => {
-        if (deletedUser) {
-            res.json(deletedUser);
-        } else {
-            res.status(404).json({ err: "User could not be found." });
-        }
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({ err });
-    });
+        .then(deletedUser => {
+            if (deletedUser) {
+                res.json(deletedUser);
+            } else {
+                res.status(404).json({ err: "User could not be found." });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ err });
+        });
 });
 
 
 module.exports = router;
-//
-//
-////router.post("/login", (req, res) => {
-////    User.findOne({
-////        where: {
-////            email: req.body.email
-////        }
-////    })
-////        .then(foundUser => {
-////            if (!foundUser) {
-////                return req.session.destroy(() => {
-////                    return res.status(401).json({ err: "invalid username or password." });
-////                });
-////            }
-////            if (!req.body.password) {
-////                return req.session.destroy(() => {
-////                    return res.status(401).json({ err: "invalid username or password." });
-////                });
-////            }
-////            if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-////                req.session.user = {
-////                    id: foundUser.id,
-////                    email: foundUser.email,
-////                    username: foundUser.username
-////                };
-////                return res.json({
-////                    id: foundUser.id,
-////                    email: foundUser.email,
-////                    username: foundUser.username
-////                });
-////            } else {
-////                return req.session.destroy(() => {
-////                    return res.status(401).json({ err: "invalid username or password." });
-////                });
-//            }
-//        })
-//        .catch(err => {
-//            console.error(err);
-//            res.status(500).json({ err });
-//        });
-//});
-
-
-//router.get("/logout", (req, res) => {
-//    req.session.destroy(() => {
-//        res.json({ msg: "Session has been deleted." })
-//    });
-//});

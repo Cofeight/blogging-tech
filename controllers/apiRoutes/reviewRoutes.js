@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Review } = require('../../models/');
 
-
 // CREATE - .post("/(tablename)")
 
 // READ ALL - .get("/(tablename)")
@@ -42,10 +41,13 @@ router.get("/:id", (req, res) => {
 
 //CREATE 
 router.post("/", (req, res)=> { 
+    if(!req.session.user) {
+        return res.status(403).json({ err:"login is required."})
+    }
     Review.create({
         rating:req.body.rating,
         review:req.body.review,
-        UserId:req.body.UserId,
+        UserId:req.session.user.id,
         GoproId:req.body.GoproId
     })
     .then(newReview=> {
@@ -59,9 +61,17 @@ router.post("/", (req, res)=> {
 
 //UPDATE
 router.put("/:id", (req, res)=>{
+    if(!req.session.user) {
+        return res.status(403).json({ err:"login is required."})
+    }
+    Review.findByPk(req.params.id).then(foundReview => {
+        if(req.session.user.id !== foundReview.UserId) {
+            return res.status(403).json({err:"Users can only delete their own reviews."})
+        }
     Review.update({
         rating:req.body.rating,
         review:req.body.review,
+        GoproId:req.body.GoproId
     },{
         where: {
             id:req.params.id
@@ -78,10 +88,21 @@ router.put("/:id", (req, res)=>{
         console.error(err);
         res.status(500).json({ err });
     });
+}).catch(err => {
+    console.error(err);
+    res.status(500).json({ err });
+});
 });
 
 //DELETE
 router.delete("/:id", (req, res)=>{
+    if(!req.session.user) {
+        return res.status(403).json({ err:"login is required."})
+    }
+    Review.findByPk(req.params.id).then(foundReview => {
+        if(req.session.user.id !== foundReview.UserId) {
+            return res.status(403).json({err:"Users can only delete their own reviews."})
+        }
     Review.destroy({
         where:{
             id:req.params.id
@@ -98,33 +119,12 @@ router.delete("/:id", (req, res)=>{
         console.log(err);
         res.status(500).json({err})
     });
+})    .catch(err => {
+    console.log(err);
+    res.status(500).json({err})
+});;
 });
+ 
 
     module.exports = router;
-
-
-
-    
-
-    //
-//
-////    if (!req.session.user) {
-//        return res.status(403).json({ err: "Login is required." })
-//    }
-//Review.findByPk(req.params.id)
-//.then(foundReview => {
-//    if (req.session.user.id !== foundReview.UserId) {
-//        return res.status(403).json({ err: "This review cannot be edited." })
-//    }
-
-
-
-
-
-//if (!req.session.user) {
-//    return res.status(403).json({ err: "Login is required." });
-//}
-//Review.findByPk(req.params.id).then(foundReview => {
-//    if (req.session.user.id !== foundReview.UserId) {
-//        return res.status(403).json({ err: "not your Review!" });
-//    }
+ 
