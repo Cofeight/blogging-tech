@@ -23,7 +23,7 @@ router.get("/models", (req, res)=> {
 })
 
 
-//ROUTES TO ONE MODEL PAGE
+//ROUTES TO MODEL PAGE BY MODEL ID
 
 router.get("/models/:id",(req,res)=>{
    Gopro.findByPk(req.params.id, {
@@ -40,6 +40,7 @@ router.get("/models/:id",(req,res)=>{
 })
 
 
+//ROUTES TO PROFILE PAGE BY USER ID
 router.get("/profile/:id",(req,res)=>{
     User.findByPk(req.params.id, {
         include: [{
@@ -54,20 +55,14 @@ router.get("/profile/:id",(req,res)=>{
     })
  })
  
- 
 
+router.get("/login",(req,res)=>{
+  return res.render("login")
+})
 
-
-
-
-//router.get("/login",(req,res)=>{
-//   if(req.session.user){
-//       res.render(`/profile/${req.session.user.id}`)
-//   }
-//  return  res.render("profile")
-//})
-//
 module.exports = router;
+
+
 
 
 ////////////////////////////////SAVE
