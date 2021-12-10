@@ -1,12 +1,13 @@
 const express = require('express');
-const router = express.Router();
-const postRoutes = require("./postRoutes");
+const router = express.Router(); 
+const goproRoutes = require ("./goproRoutes")
 const userRoutes = require("./userRoutes");
-const opinionRoutes = require("./opinionRoutes");
+const reviewRoutes = require("./reviewRoutes");
 
-router.use('/posts', postRoutes);
+
+router.use('/gopro', goproRoutes);
 router.use('/users', userRoutes);
-router.use('/opinions', opinionRoutes);
+router.use('/reviews', reviewRoutes);
 router.get('/',(req, res) => {
     res.send("apiRoutes/index.js has been reached.")
 })

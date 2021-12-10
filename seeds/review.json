@@ -1,0 +1,26 @@
+[
+    {
+        "rating": 4,
+        "review": "It does not compete with other items on the market currently.",
+        "UserId": 1,
+        "GoproId": 1
+    },
+    {
+        "rating": 8,
+        "review": "One of the best cameras out there!",
+        "UserId": 3,
+        "GoproId": 4
+    },
+    {
+        "rating": 1,
+        "review": "Why is it so difficult to get good pictures with this camera?",
+        "UserId": 2,
+        "GoproId": 1
+    },
+    {
+        "rating": 10,
+        "review": "Simply the best!",
+        "UserId": 3,
+        "GoproId": 3
+    }
+]

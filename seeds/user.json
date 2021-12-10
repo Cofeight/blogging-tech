@@ -1,7 +1,7 @@
 [
     {
-        "email": "blogtest@blog.com",
-        "username": "blogtest",
+        "email": "dorsey@blog.com",
+        "username": "dorseyblog",
         "password": "password"
     },
     {
@@ -10,8 +10,8 @@
         "password": "password"
     },
     {
-        "email": "boboblaw@blog.com",
-        "username": "boboblaw",
+        "email": "boboblawg@blog.com",
+        "username": "boboblawg",
         "password": "password"
     },
     {

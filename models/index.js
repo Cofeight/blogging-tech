@@ -1,30 +1,29 @@
+const Gopro = require("./Gopro")
 const User = require("./User")
-const Post = require("./Post")
-const Opinion = require("./Opinion")
+const Review = require("./Review")
 
-User.hasMany(Opinion,{
+User.hasMany(Review, {
     onDelete: "CASCADE"
 });
 
-Opinion.belongsTo(User);
-
-Post.hasMany(Opinion,{
+Review.belongsTo(User);
+Gopro.hasMany(Review, {
     onDelete: "CASCADE"
 });
 
-Opinion.belongsTo(Post);
-
-User.belongsToMany(Post, {
-    as:"thoughts",
-    through:"UserPosts"
-})
-
-Post.belongsToMany(User, {
-    through:"UserPosts"
-})
+Review.belongsTo(Gopro);
+//
+//User.belongsToMany(Gopro, {
+//    as:"favorites",
+//    through:"UserGopro"
+//})
+//
+//Gopro.belongsToMany(User, {
+//    through:"UserGopro"
+//})
 
 module.exports = {
-    User, 
-    Post,
-    Opinion
+    Gopro,
+    User,
+    Review
 }

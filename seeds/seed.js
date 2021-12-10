@@ -1,18 +1,32 @@
 const sequelize = require("../config/connection");
-const {Post, User, Opinion} = require("../models")
-const postData = require ("./posts.json")
-const userData = require ("./users.json")
-const opinionData = require ("./opinions.json")
+const {Gopro, User, Review} = require("../models")
+const goproData = require ("./gopro.json")
+const userData = require ("./user.json")
+const reviewData = require ("./review.json")
 
-const seed = async () => {
+const seedDatabase = async () => {
     await sequelize.sync({force: true});
-    await Post.bulkCreate(postData);
-    console.log("Your post data has been seeded.");
-    await User.bulkCreate(userData, {individualHooks:true});
+    
+    await Gopro.bulkCreate(goproData);
+    console.log("Your gopro data has been seeded.");
+
+    await User.bulkCreate(userData);
     console.log("Your user data has been seeded.");
-    await Opinion.bulkCreate(opinionData);
-    console.log("Your opinion data has been seeded.");
+
+    await Review.bulkCreate(reviewData);
+    console.log("Your review data has been seeded.");
+
+
+
     process.exit(0);
 };
 
-seed()
+seedDatabase()
+
+
+
+
+
+
+//await Review.bulkCreate(reviewData);
+//console.log('Your review data has been seeded.');

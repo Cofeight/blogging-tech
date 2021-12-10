@@ -1,0 +1,18 @@
+<h1>USER POSTS YALLLLL</h1>
+
+
+
+
+<div>
+  <textarea id="post-name" placeholder="Title of Post"></textarea>
+  <textarea id="post-area" placeholder="share your thoughts!"></textarea>
+  <button class="btn btn-primary" id="post-btn">Post</button>
+</div>
+
+
+{{#each post}}
+<div class="card">
+    <h3>{{post.title}}</h3>
+    <h2>{{post.content}}</h2>
+</div>
+{{/each}}
