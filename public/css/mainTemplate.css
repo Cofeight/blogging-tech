@@ -7,8 +7,8 @@
 
 .navbar-links {
 transition: 0.7s;
-background-color: red;
-border: 10px solid rgb(39, 236, 13);
+background-color: black;
+border: 10px solid gray;
 display: flex;
 padding: 10px;
 padding-left: 30px;
@@ -16,6 +16,20 @@ padding-right: 30px;
 text-decoration: none;
 justify-content: space-between;
 }
+
+.navbar-links a{
+  margin-left: 20px;
+  color:gray;
+  text-decoration: none;
+  padding-right: 30px;
+  font-size: 30px;
+}
+
+.navbar-links a:hover {
+    color: white;
+    transition: 0.9s;
+  }
+  
 
 .pageHeader {
     text-align: center;
@@ -35,13 +49,25 @@ justify-content: space-between;
     align-items: center;
 }
 
+a.card {
+    text-decoration: none;
+    color:black;
+    transition: 0.3s;
+}
 
+
+a.card:hover {
+    opacity: 0.3;
+    text-decoration: none;
+    color:black;
+}
 
 
 .card {
     width: 50%;
     border: 1px solid black;
     text-align: center;
+    background-color: rgb(220, 221, 221);
 
 }
 

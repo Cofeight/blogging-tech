@@ -2,12 +2,10 @@
 
 <div class="cardContainer">
   {{#each models}}
-
-  <div class="card">
+  <a class="card" href="/models/{{id}}">
     <h2 class="card-model">{{model}}</h2>
     <img src="{{image}}" alt="{{model}}" height="50%" width="50%">
-  </div>
-
+</a>
   {{/each}}
 
 </div>
