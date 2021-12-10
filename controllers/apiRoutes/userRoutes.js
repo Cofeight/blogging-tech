@@ -98,9 +98,9 @@ router.post("/", (req, res) => {
     })
         .then(newUser => {
             req.session.user = {
-                id: foundUser.id,
-                email: foundUser.email,
-                username: foundUser.username
+                id: newUser.id,
+                email: newUser.email,
+                username: newUser.username
             };
             res.json(newUser);
         })

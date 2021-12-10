@@ -55,12 +55,20 @@ router.get("/profile/:id",(req,res)=>{
     })
  })
  
-
 router.get("/login",(req,res)=>{
-  return res.render("login")
+    if(req.session.user){
+        return res.redirect(`/profile/${req.session.user.id}`)
+    }
+   return  res.render("login")
 })
 
+
+
 module.exports = router;
+
+
+
+
 
 
 
