@@ -6,7 +6,7 @@
 
 
 ## Description
-A simple blog for Go-Pro enthusiasts utilizing CRUD functionality.
+A simple blog for Go-Pro enthusiasts utilizing the MVC paradigm.
 
 ## Table of Contents
 
