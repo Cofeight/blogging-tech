@@ -23,7 +23,7 @@ A simple blog for Go-Pro enthusiasts utilizing CRUD functionality.
 Install the necessary npm packages, ensure the server is running, and deploy the front end components.
 
 ## Usage
-[screenshot of page]
+![screenshot of page](https://github.com/Cofeight/blogging-tech/blob/main/public/assets/screenshot.png)
 
 ## License
 MIT
