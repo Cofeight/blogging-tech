@@ -1,0 +1,28 @@
+<h1>Add your review of the {{model}}</h1>
+<img class="reviewCardImage" src="{{image}}" alt="{{model}}">
+
+
+<div class="review-card">
+<form id="add-review-form">
+    <input type="hidden" id="rating-id" value={{id}}>
+    <label id="score-label" for="rating">Rating from 1-10:</label>
+    <select id="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+    <input id="review-post-area" placeholder="share your thoughts!" cols="30" rows="10"></input>
+    <button class="review-post-button" id="post-btn">add your review!</button>
+</form>
+</div>
+
+
+
+<script src="/js/addReview.js"></script>

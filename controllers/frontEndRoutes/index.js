@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {User, Gopro, Review} = require("../../models");
+
 //
 router.get("/", (req, res)=> {
    return res.render("home")
@@ -22,7 +23,6 @@ router.get("/models", (req, res)=> {
 })
 })
 
-
 //ROUTES TO MODEL PAGE BY MODEL ID
 
 router.get("/models/:id",(req,res)=>{
@@ -39,7 +39,6 @@ router.get("/models/:id",(req,res)=>{
    })
 })
 
-
 //ROUTES TO PROFILE PAGE BY USER ID
 router.get("/profile/:id",(req,res)=>{
     User.findByPk(req.params.id, {
@@ -54,7 +53,9 @@ router.get("/profile/:id",(req,res)=>{
         res.render("profile",handlebarsData);
     })
  })
- 
+
+//ROUTES TO LOGIN PAGE
+//REDIRECTS LOGGED IN USER TO THEIR PROFILE PAGE
 router.get("/login",(req,res)=>{
     if(req.session.user){
         return res.redirect(`/profile/${req.session.user.id}`)
@@ -62,6 +63,17 @@ router.get("/login",(req,res)=>{
    return  res.render("login")
 })
 
+
+router.get("/reviews/add/:id",(req,res)=>{
+   if(!req.session.user){
+       return res.redirect(`/login`)
+   }
+   Gopro.findByPk(req.params.id).then(singleGopro=>{
+       const handlebarsData = singleGopro.get({plain:true})
+       console.log(handlebarsData);
+       res.render("reviews/add",handlebarsData)
+   })
+})
 
 
 module.exports = router;
@@ -117,13 +129,3 @@ module.exports = router;
 //})
 
 
-//router.get("/posts/add/:id",(req,res)=>{
-//   if(!req.session.user){
-//       return res.redirect(`/login`)
-//   }
-//   Post.findByPk(req.params.id).then(singleUserPost=>{
-//       const handlebarsData = singleUserPost.get({plain:true})
-//       console.log(handlebarsData);
-//       res.render("post/add",handlebarsData)
-//   })
-//}
