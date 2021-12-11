@@ -6,7 +6,7 @@
 
 
 ## Description
-A simple blog for Tech enthusiasts utilizing CRUD functionality.
+A simple blog for Go-Pro enthusiasts utilizing CRUD functionality.
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ A simple blog for Tech enthusiasts utilizing CRUD functionality.
 Install the necessary npm packages, ensure the server is running, and deploy the front end components.
 
 ## Usage
-For creating, reading, updating, and deleting blog posts focused on tech.
+[screenshot of page]
 
 ## License
 MIT
