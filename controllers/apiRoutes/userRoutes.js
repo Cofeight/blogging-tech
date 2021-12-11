@@ -66,12 +66,19 @@ router.post("/login", (req, res) => {
         })
 });
 
+
 //DESTROY SESSION / LOGOUT
-router.get("/logout", (req, res) => {
-    req.session.destroy(() => {
-        res.json({ msg: "Session has been destroyed." })
-    });
-});
+//REDIRECTS TO LOGIN PAGE
+router.get('/logout', (req, res) => {
+    if (req.session.user) {
+      req.session.destroy(() => {
+        res.status(204).redirect(`/login`)
+      });
+    } else {
+      res.status(404).redirect(`/login`);
+    }
+  });
+
 
 //READ ONE
 router.get("/:id", (req, res) => {
@@ -157,6 +164,8 @@ router.delete("/:id", (req, res) => {
             res.status(500).json({ err });
         });
 });
+
+
 
 
 module.exports = router;
