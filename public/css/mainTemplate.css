@@ -35,11 +35,33 @@
     text-align: center;
 }
 
+body {
+    background: url(https://images.unsplash.com/photo-1490971269589-386b2934c495?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2041&q=80) no-repeat center fixed;
+}
+
+
 .signup-header {
     text-align: center;
     color: gray;
 }
 
+.model-title {
+    text-align: center;
+}
+
+#models-page {
+    text-decoration: none;
+    text-align: center;
+    color: gray;
+    background-color: black;
+    border: 5px solid gray;
+    border-radius: 15px;
+}
+
+#models-page:hover {
+    transition: 0.3s;
+    color: white;
+}
 
 .login-card {
     margin-left: auto;
@@ -222,11 +244,6 @@ a.card:hover {
     display: flex;
     flex-wrap: wrap;
     width: 80vh;
-    margin: 0 auto;
-}
-
-.card > img {
-    display:block;
     margin: 0 auto;
 }
 

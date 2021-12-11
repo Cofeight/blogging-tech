@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {Gopro} = require("../../models")
+const {Gopro, User} = require("../../models")
 
 
 //COMPLETED AT 1:10:00
@@ -58,6 +58,18 @@ router.post("/", (req, res)=> {
         res.status(500).json({ err });
     });
 });
+
+
+router.post("/favorite/:id", (req, res)=> {
+    if(!req.session.user){
+        return res.status(403).json({err:"Must be logged in."})
+    }
+    User.findByPk(req.session.user.id).then(loggedInUser=> {
+        loggedInUser.addFavorite(req.params.id).then(result => {
+            res.json(result);
+        })
+    })
+})
 
 //UPDATE
 router.put("/:id", (req, res)=>{

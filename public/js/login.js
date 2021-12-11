@@ -39,7 +39,7 @@ document.querySelector("form#signup").addEventListener("submit",(e)=>{
     })
     .then(res=>{
         if(!res.ok){
-            return alert("Sad Trombone!")
+            return alert("Try Again!")
         } else {
             res.json().then(data=>{
                 location.href = `/profile/${data.id}`

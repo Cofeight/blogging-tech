@@ -1,14 +1,15 @@
 <h1 class="pageHeader">{{model}}</h1>
-<img class="big-image" src="{{image}}" alt="{{model}}" >
+
 
 <h2 class="reviewHeader">Model Reviews</h2>
 <div class="cardReviewContainer">
-{{#each Reviews}}
+    <img class="big-image" src="{{image}}" alt="{{model}}">
+    {{#each Reviews}}
     <div class="card">
         <a class="reviewCard" href="/profile/{{User.id}}">{{User.username}}</a>
         <h4>Rating: {{rating}}</h4>
         <p>{{review}}</p>
         <p>{{userId}}</p>
     </div>
-{{/each}}
+    {{/each}}
 </div>

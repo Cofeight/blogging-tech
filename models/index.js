@@ -12,15 +12,15 @@ Gopro.hasMany(Review, {
 });
 
 Review.belongsTo(Gopro);
-//
-//User.belongsToMany(Gopro, {
-//    as:"favorites",
-//    through:"UserGopro"
-//})
-//
-//Gopro.belongsToMany(User, {
-//    through:"UserGopro"
-//})
+
+User.belongsToMany(Gopro, {
+    as:"favorites",
+    through:"UserGopro"
+})
+
+Gopro.belongsToMany(User, {
+    through:"UserGopro"
+})
 
 module.exports = {
     Gopro,

@@ -2,13 +2,13 @@
 
 <h2 class="reviewHeader">Model Reviews</h2>
 <div class="profileCardReviewContainer">
-{{#each Reviews}}
-                <img class="big-image" src="{{Gopro.image}}" alt="{{Gopro.model}}">
+    {{#each Reviews}}
+    <img class="big-image" src="{{Gopro.image}}" alt="{{Gopro.model}}">
     <div class="card">
         <h3>{{Gopro.model}}</h3>
         <h4>Rating: {{rating}}</h4>
         <p>{{review}}</p>
         <p>{{userId}}</p>
     </div>
-{{/each}}
+    {{/each}}
 </div>
