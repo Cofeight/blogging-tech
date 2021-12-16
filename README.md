@@ -23,6 +23,7 @@ A simple blog for Go-Pro enthusiasts utilizing the MVC paradigm.
 Install the necessary npm packages, ensure the server is running, and deploy the front end components.
 
 ## Usage
+## [Deployed Site](https://tech-blogs-r-us.herokuapp.com/)
 ![screenshot of page](https://github.com/Cofeight/blogging-tech/blob/main/public/assets/screenshot.png)
 
 ## License
